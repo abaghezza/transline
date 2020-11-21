@@ -1,0 +1,5 @@
+mise en place des entités 
+
+insertion de l'entité langue qui n'a pas été migré vers la base de données
+
+module de sécurité/authentification
