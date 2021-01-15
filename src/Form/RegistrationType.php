@@ -21,14 +21,14 @@ class RegistrationType extends AbstractType
         //$now=new DateTime();
 
         $builder
-            ->add('username', TextType::class)
+->add('email', EmailType::class)
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'help' => 'Enter your password',
                 'first_options' => ['label' => 'Password'],
                 'second_options' => ['label' => 'Confirm Password'],
             ])
-            ->add('email', EmailType::class)
+            
             ->add('firstName', TextType::class)
             ->add('lastName', TextType::class)
 			->add('adress', TextType::class)

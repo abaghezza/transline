@@ -14,7 +14,7 @@
   <div class="example-wrapper">
     {% if app.user %}
       <h1>
-        Hello {{ app.user.firstname }}! ✅
+        Hello {{ app.user.firstname }}! 
       </h1>
       <p>
         you are logged in 
@@ -26,6 +26,9 @@
       <p>
         Soummettez-nous votre document et il vous sera livré dans les meilleurs délais
       </p>
+	  <p> Demander un devis c'est simple comme bonjour ! Vous rendre sur <a href="{{path('app_login')}}"> je me connecte </a> pour vous authentifier. </p>
+
+<p> Vous n'avez pas de compte ? <a href="{{path('registration')}}"> je crée mon compte en une minute ! </a> </p>
     {% endif %}
   </div>
 {% endblock %}

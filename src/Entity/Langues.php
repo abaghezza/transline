@@ -4,6 +4,9 @@ namespace App\Entity;
 
 use App\Repository\LanguesRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * @ORM\Entity(repositoryClass=LanguesRepository::class)
@@ -23,7 +26,7 @@ class Langues
     private $comblinguistique;
 
     /**
-     * @ORM\OneToOne(targetEntity=Demandes::class, mappedBy="langue", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity=Demandes::class, mappedBy="langue", cascade={"persist", "remove"})
      */
     private $demande;
 
@@ -43,8 +46,11 @@ class Langues
 
         return $this;
     }
-
-    public function getDemande(): ?Demandes
+/*getDemande function
+    * @return Collection|Demandes[]
+     */
+	 
+    public function getDemande(): Collection
     {
         return $this->demande;
     }

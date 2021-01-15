@@ -40,7 +40,7 @@ class RegistrationController extends AbstractController
             );
 
             // Set their role
-            $user->setRoles(['ROLE_USER_TEMP']);
+            $user->setRoles(['ROLE_USER']);
             
             //set the current datetime
             $user->setCreatedAt(new \DateTime("now")) ;

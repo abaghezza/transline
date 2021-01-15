@@ -25,7 +25,7 @@ class Demandes
     private $file;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Users::class, inversedBy="demande")
+     * @ORM\ManyToMany(targetEntity=Users::class, inversedBy="demande")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;

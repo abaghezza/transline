@@ -81,6 +81,9 @@
     "egulias/email-validator": {
         "version": "2.1.24"
     },
+    "laminas/laminas-zendframework-bridge": {
+        "version": "1.1.1"
+    },
     "monolog/monolog": {
         "version": "2.1.1"
     },
@@ -416,7 +419,7 @@
         "version": "v5.1.8"
     },
     "symfony/string": {
-        "version": "v5.1.8"
+        "version": "v5.1.10"
     },
     "symfony/test-pack": {
         "version": "v1.0.7"

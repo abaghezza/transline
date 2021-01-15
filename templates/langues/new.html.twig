@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajout d une combinaison linguistique{% endblock %}
+
+{% block body %}
+    <h1>Ajout de combminaison linguistique</h1>
+
+    {{ include('langues/_form.html.twig') }}
+
+    <a href="{{ path('langues_index') }}">Retour à la liste des langues</a>
+{% endblock %}
