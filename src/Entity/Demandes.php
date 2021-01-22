@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\DemandesRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -24,11 +25,11 @@ class Demandes
      */
     private $file;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Users::class, inversedBy="demande")
-     * @ORM\JoinColumn(nullable=false)
+/**
+     * @ORM\ManyToOne(targetEntity=Users::class)
      */
-    private $user;
+	 
+    private $customer;
 
     /**
      * @ORM\Column(type="datetime")
@@ -40,11 +41,31 @@ class Demandes
      */
     private $comment;
 
+/**
+     * @ORM\Column(type="text", nullable=false)
+     */
+    private $label;
+	
+	/**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $mail;
+	
     /**
-     * @ORM\OneToOne(targetEntity=Langues::class, inversedBy="demande", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity=Langues::class)
      * @ORM\JoinColumn(nullable=false)
      */
     private $langue;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Users::class)
+     */
+    private $translator;
+
+    /**
+     * @ORM\Column(type="string", length=60)
+     */
+    private $status;
 
     public function __construct()
     {
@@ -86,14 +107,14 @@ class Demandes
         return $this;
     }
 
-    public function getUser(): ?Users
+    public function getCustomer(): ?Users
     {
-        return $this->user;
+        return $this->customer;
     }
 
-    public function setUser(?Users $user): self
+    public function setCustomer(?Users $customer): self
     {
-        $this->user = $user;
+        $this->customer = $customer;
 
         return $this;
     }
@@ -122,6 +143,30 @@ class Demandes
         return $this;
     }
 
+public function getLabel(): ?string
+    {
+        return $this->label;
+    }
+
+    public function setLabel(?string $comment): self
+    {
+        $this->label = $label;
+
+        return $this;
+    }
+		
+	public function getMail(): ?string
+    {
+        return $this->mail;
+    }
+
+    public function setMail(?string $comment): self
+    {
+        $this->mail = $mail;
+
+        return $this;
+    }
+	
     public function getLangue(): ?Langues
     {
         return $this->langue;
@@ -130,6 +175,30 @@ class Demandes
     public function setLangue(Langues $langue): self
     {
         $this->langue = $langue;
+
+        return $this;
+    }
+
+    public function getTranslator(): ?Users
+    {
+        return $this->translator;
+    }
+
+    public function setTranslator(?Users $translator): self
+    {
+        $this->translator = $translator;
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }

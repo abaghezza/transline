@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}faire une demande de traduction{% endblock %}
+
+{% block body %}
+    <h1>Commander une traduction</h1>
+
+    {{ include('demandes/_form.html.twig') }}
+
+    <a href="{{ path('demandes_index') }}">Retour à mes commandes</a>
+{% endblock %}

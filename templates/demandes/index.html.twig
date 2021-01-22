@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello DemandesController!{% endblock %}
+{% block title %} Demandes index{% endblock %}
 
 {% block body %}
 <style>
@@ -9,12 +9,41 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <h1>Toutes les demandes</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/wamp64/www/projets/transline/src/Controller/DemandesController.php'|file_link(0) }}">src/Controller/DemandesController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/wamp64/www/projets/transline/templates/demandes/index.html.twig'|file_link(0) }}">templates/demandes/index.html.twig</a></code></li>
-    </ul>
+<table class="table" id="lstindex">
+		<thead>
+			<tr>
+				<th>User</th>
+				<th>date de creation</th>			
+				<th>Status</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+    <tbody>		
+	
+			{% for demandes in demandes %}
+			<tr>
+			<td>
+						<a href="{{path('user_show', {'id':demande.user.id} )}}">
+							{{demandes.user.firstname}}
+						</a>
+					</td>
+		<td>{{ demandes.createdAt ? demande.createdAt|date('Y-m-d H:i:s') : '' }}
+					</td>			
+					
+					<td>{{ demandes.status  }}</td>
+					<td>
+					<a href="{{ path('demande_show', {'id': demandes.id}) }}">Afficher</a>
+						<a href="{{ path('demande_edit', {'id': demandes.id}) }}">Modifier</a>
+					</td>
+				</tr>
+				{% else %}
+				<tr>
+					<td colspan="6">Aucun enregistrement a afficher</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
 </div>
 {% endblock %}

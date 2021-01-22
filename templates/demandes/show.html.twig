@@ -1,0 +1,96 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+
+	
+	Informations sur la commande
+	{{ demandes.label }}
+{% endblock %}
+
+{% block body %}
+	
+	<table class="table">
+		<th>
+
+			<a href="{{ path('demandes_index') }}">Liste des commandes/</a>
+			{{ demandes.label  }}
+		</th>
+		<td>
+			Id:
+			{{demandes.id}}
+		</td>
+	</table>
+	
+	<h1>
+		{{ demandes.label  }}
+	</h1>
+
+	<table class="table">
+		<tbody>
+			<tr>
+				<th>
+					Files
+				</th>
+				<td>
+					
+					<a href="{{ path('files_index',{d:demandes.id}) }}">Voir le fichier</a>
+					
+				</td>
+			</tr>
+			<tr>
+				<th>
+					commentaire
+				</th>
+				<td>
+					{{ demandes.comment }}
+				</td>
+			</tr>
+			
+					
+			<tr>
+				<th>
+					Combinaison linguistique
+				</th>
+				<td>
+					{{ demandes.langue }}
+				</td>
+			</tr>
+			<tr>
+				
+			
+
+
+			<th>
+				Date de commande
+			</th>
+			<td>
+				{{ demandes.createdAt ? demandes.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+		</tbody>
+	</tr>
+	{% if is_granted('ROLE_ADMIN') %}
+		
+		<tr>
+			<th>
+				commande passee par
+			</th>
+			{% if demandes.customer %}
+				<td>
+					{{ demandes.customer.firstname }}
+				</td>
+			{% else %}
+				<td>
+					Client inexistant
+				</td>
+			{% endif %}
+		</tr>
+	{% endif %}
+</tbody>
+</table>
+{% if demandes.customer==app.user or is_granted('ROLE_ADMIN')%}
+<button class="btn-link"><a href="{{ path( 'edit_demande', { id: demandes.id } ) }}">Modifier la demande</a></button>
+ or 
+<button class"btn-link"><a href="{{ path('new_files', {d:demandes.id}) }}"> Ajouter un fichier</a></button>
+
+
+{{ include('demandes/_delete_form.html.twig') }}
+{% endif %}
+{% endblock %}

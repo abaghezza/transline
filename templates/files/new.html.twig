@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau fichier{% endblock %}
+
+{% block body %}
+    <h1>Ajouter un nouveau fichier</h1>
+
+    {{ include('files/_form.html.twig') }}
+
+    <a href="{{ path('files', {'d':d}) }}">Retour a la liste des fichiers</a>
+{% endblock %}

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello FilesController!{% endblock %}
+{% block title %}Fichiers index{% endblock %}
 
 {% block body %}
 <style>
@@ -9,12 +9,57 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    {# Note: admin mode, list of all files in the files menu #}
+		<h1>Liste de tous les  fichiers</h1> 
+		
+		<a href="{{ path('new_file', {d:d}) }}">Nouveau
+			</a>
+			
+		<table class="table">
+			<thead>
+				<tr>
+					{#<th>Id</th>#}
+					<th>Name</th>
+					<th>Path</th>
+					<th>Extension</th>
+					<th>Size</th>
+					<th>Type</th>
+					<th>actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for file in files %}
+					<tr>
+						{#<td>{{ file.id }}</td>#}
+						<td>
+							<a href="{{ path('files_show', {'id': file.id}) }}">{{ file.name }}</a>
+						</td>
+						<td>{{ file.path }}</td>
+						{% if file.extension== "application/pdf" %}
+						<td>pdf</td>
+						{% elseif file.extension == "application/msword" or file.extension == "application/vnd.openxmlformats-officedocument.wordprocessingml.document" %}
+						<td>doc/docx</td>
+						{% else %}
+						<td>{{ file.extension }}</td>
+						{% endif %}
+						
+						<td>{{ file.size }}</td>
+						<td>{{ file.type }}</td>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/wamp64/www/projets/transline/src/Controller/FilesController.php'|file_link(0) }}">src/Controller/FilesController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/wamp64/www/projets/transline/templates/files/index.html.twig'|file_link(0) }}">templates/files/index.html.twig</a></code></li>
-    </ul>
-</div>
+						<td>
+							{#<a href="{{ path('files_show', {'id': file.id}) }}">show</a>#}
+							<a href="{{ path('files_delete', {'id': file.id}) }}">delete</a>
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="7">aucun fichier dans la liste</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+
+    
+	</div>
 {% endblock %}

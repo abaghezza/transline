@@ -19,6 +19,18 @@ class FilesRepository extends ServiceEntityRepository
         parent::__construct($registry, Files::class);
     }
 
+public function findByExampleField($value)
+    {
+        return $this->createQueryBuilder('f')
+            ->andWhere('f.exampleField = :val')
+            ->setParameter('val', $value)
+            ->orderBy('f.id', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+	
     // /**
     //  * @return Files[] Returns an array of Files objects
     //  */
@@ -47,4 +59,18 @@ class FilesRepository extends ServiceEntityRepository
         ;
     }
     */
+	
+	public function findAllFilesByDemande($demande){
+       
+        return $this->createQueryBuilder('f')
+        ->andWhere('f.demande = :val')
+        ->setParameter('val', $demande)
+        ->orderBy('f.id', 'ASC')
+        ->setMaxResults(10)
+        ->getQuery()
+        ->getResult()
+    ;
+    ;
+
+    }
 }
