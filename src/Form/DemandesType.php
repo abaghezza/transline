@@ -41,11 +41,11 @@ class DemandesType extends AbstractType
 
             ->add('langue', EntityType::class, array(
                 'class' => Langues::class,
-                'choice_label' => 'label', 
+                'choice_label' => 'combination', 
                 'multiple'=>true,
                 'expanded' => false,
                 'label' => 'combinaison linguistique',
-                'choice_value'=> 'id'
+                'choice_value'=> 'combination'
                 
             ));
            
@@ -56,7 +56,7 @@ class DemandesType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Documents::class,
+            'data_class' => Demandes::class,
         ]);
     }
 }

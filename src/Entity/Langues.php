@@ -23,7 +23,7 @@ class Langues
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $comblinguistique;
+    private $combination;
 
     /**
      * @ORM\OneToMany(targetEntity=Demandes::class, mappedBy="langue", cascade={"persist", "remove"})
@@ -35,14 +35,14 @@ class Langues
         return $this->id;
     }
 
-    public function getComblinguistique(): ?string
+    public function getCombination(): ?string
     {
-        return $this->comblinguistique;
+        return $this->combination;
     }
 
-    public function setComblinguistique(string $comblinguistique): self
+    public function setCombination(string $combination): self
     {
-        $this->comblinguistique = $comblinguistique;
+        $this->combination = $combination;
 
         return $this;
     }

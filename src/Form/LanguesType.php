@@ -12,7 +12,7 @@ class LanguesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('comblinguistique')
+            ->add('combination')
         ;
     }
 

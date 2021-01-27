@@ -6,6 +6,7 @@ use App\Entity\Demandes;
 use App\Entity\Users;
 use App\Entity\Files;
 use App\Repository\FilesRepository;
+use App\Repository\UsersRepository;
 use App\Form\DemandesType;
 use App\Repository\DemandesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -49,7 +50,7 @@ class DemandesController extends AbstractController
      * @Route("/new", name="new_demande", methods={"GET","POST"})
      */
 	 
-    public function new_demande(Request $request, UserRepository $reposUser): Response
+    public function new_demande(Request $request, UsersRepository $reposUser): Response
  {
         $demandes = new Demandes();
 		

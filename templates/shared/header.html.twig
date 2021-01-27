@@ -26,6 +26,13 @@
 						Utilisateurs
 					</a>
 					
+					<a class="dropdown-item" href="{{path('demandes_index')}}">
+						Demandes
+					</a>
+					
+					<a class="dropdown-item" href="{{path('langues_index')}}">
+						Langues
+					</a>
 					<a class="dropdown-item" href="{{path('files')}}">
 						Fichiers
 					</a>
@@ -34,5 +41,22 @@
 					</div>
 					
 					</div>
+					
+					<div class="collapse navbar-collapse" id="navbarSupportedContent"></div>
+	<ul class="nav navbar-nav navbar-right">
+		{% if app.user %}
+			<li>
+				<a class="nav-link" href="{{ path('app_logout') }}">Me déconnecter</a>
+			</li>
+		{% else %}
+			<li>
+				<a class="nav-link" href="{{ path('app_login') }}">accéder à mon espace</a>
+			</li>
+			<p>Vous n'avez pas de compte?</p>
+			<li>
+				<a class="nav-link" href="{{ path('registration') }}">Je crée mon compte</a>
+			</li>
+		{% endif %}
+	</ul>
 			</nav>
 			
