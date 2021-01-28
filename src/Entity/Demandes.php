@@ -20,16 +20,17 @@ class Demandes
      */
     private $id;
 
+/**
+     * @ORM\ManyToOne(targetEntity=Users::class, inversedBy="demandes")
+     */
+    private $user;
+	
     /**
      * @ORM\OneToMany(targetEntity=Files::class, mappedBy="demande")
      */
     private $file;
 
-/**
-     * @ORM\ManyToOne(targetEntity=Users::class)
-     */
-	 
-    private $customer;
+
 
     /**
      * @ORM\Column(type="datetime")
@@ -51,25 +52,26 @@ class Demandes
      */
     private $mail;
 	
+
+
+    /**
+     * @ORM\Column(type="string", length=60)
+     */
+    private $status = "initialisée";
+
     /**
      * @ORM\ManyToOne(targetEntity=Langues::class)
      * @ORM\JoinColumn(nullable=false)
      */
     private $langue;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Users::class)
-     */
-    private $translator;
-
-    /**
-     * @ORM\Column(type="string", length=60)
-     */
-    private $status;
+    
 
     public function __construct()
     {
+		
         $this->file = new ArrayCollection();
+        
     }
 
     public function getId(): ?int
@@ -107,17 +109,7 @@ class Demandes
         return $this;
     }
 
-    public function getCustomer(): ?Users
-    {
-        return $this->customer;
-    }
-
-    public function setCustomer(?Users $customer): self
-    {
-        $this->customer = $customer;
-
-        return $this;
-    }
+    
 
     public function getCreatedAt(): ?\DateTimeInterface
     {
@@ -148,7 +140,7 @@ public function getLabel(): ?string
         return $this->label;
     }
 
-    public function setLabel(?string $comment): self
+    public function setLabel(?string $label): self
     {
         $this->label = $label;
 
@@ -156,42 +148,32 @@ public function getLabel(): ?string
     }
 		
 	public function getMail(): ?string
-    {
-        return $this->mail;
-    }
+                            {
+                                return $this->mail;
+                            }
 
-    public function setMail(?string $comment): self
+    public function setMail(?string $mail): self
     {
         $this->mail = $mail;
 
         return $this;
     }
 	
-    public function getLangue(): ?Langues
+	
+
+    public function getUser(): ?Users
     {
-        return $this->langue;
+        return $this->user;
     }
 
-    public function setLangue(Langues $langue): self
+    public function setUser(?Users $user): self
     {
-        $this->langue = $langue;
+        $this->user = $user;
 
         return $this;
     }
 
-    public function getTranslator(): ?Users
-    {
-        return $this->translator;
-    }
-
-    public function setTranslator(?Users $translator): self
-    {
-        $this->translator = $translator;
-
-        return $this;
-    }
-
-    public function getStatus(): ?string
+    public function getStatus($status): ?string
     {
         return $this->status;
     }
@@ -202,4 +184,17 @@ public function getLabel(): ?string
 
         return $this;
     }
+
+    public function getLangue(): ?Langues
+    {
+        return $this->langue;
+    }
+
+    public function setLangue(?Langues $langue): self
+    {
+        $this->langue = $langue;
+
+        return $this;
+    }
+
 }

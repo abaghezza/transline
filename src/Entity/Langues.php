@@ -3,7 +3,11 @@
 namespace App\Entity;
 
 use App\Repository\LanguesRepository;
+use App\Repository\DemandesRepository;
+use App\Entity\Demandes;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Doctrine\DBAL\Query\QueryBuilder;
 use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -25,11 +29,12 @@ class Langues
      */
     private $combination;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Demandes::class, mappedBy="langue", cascade={"persist", "remove"})
-     */
-    private $demande;
+    
 
+    
+
+
+	
     public function getId(): ?int
     {
         return $this->id;
@@ -46,24 +51,7 @@ class Langues
 
         return $this;
     }
-/*getDemande function
-    * @return Collection|Demandes[]
-     */
-	 
-    public function getDemande(): Collection
-    {
-        return $this->demande;
-    }
 
-    public function setDemande(Demandes $demande): self
-    {
-        $this->demande = $demande;
+    
 
-        // set the owning side of the relation if necessary
-        if ($demande->getLangue() !== $this) {
-            $demande->setLangue($this);
-        }
-
-        return $this;
-    }
 }

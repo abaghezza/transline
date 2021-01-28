@@ -3,10 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Demandes;
+use App\Entity\Langues;
 use App\Entity\Users;
 use App\Entity\Files;
 use App\Repository\FilesRepository;
 use App\Repository\UsersRepository;
+use App\Repository\LanguesRepository;
 use App\Form\DemandesType;
 use App\Repository\DemandesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -59,10 +61,12 @@ class DemandesController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 			$demandes->setCreatedAt(new \DateTime('now'));
-            $demandes->setCustomer($this->getUser());
+			$demandes->setUser($this->getUser());
+						//$demandes->setStatus($this->getStatus());
 			$entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($demandes);
             $entityManager->flush();
+			 //return $this->redirectToRoute('demandes_index');
             return $this->redirectToRoute('new_file', ['d'=>$demandes->getId()]);
             }
 
@@ -71,6 +75,7 @@ class DemandesController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
 	
 	/**
      * @Route("/{id}", name="show_demandes", methods={"GET"})

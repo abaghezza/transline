@@ -5,6 +5,8 @@ namespace App\Form;
 use App\Entity\Langues;
 use App\Entity\Users;
 use App\Entity\Demandes;
+use App\Repository\UsersRepository;
+use App\Repository\LanguesRepository;
 use Symfony\Component\Form\AbstractType;
 use Vich\UploaderBundle\Form\Type\VichFileType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -38,19 +40,15 @@ class DemandesType extends AbstractType
                 'required' => false,
                 'label' => 'Mail de livraison si different '
             ])
-
-            ->add('langue', EntityType::class, array(
-                'class' => Langues::class,
-                'choice_label' => 'combination', 
-                'multiple'=>true,
-                'expanded' => false,
-                'label' => 'combinaison linguistique',
-                'choice_value'=> 'combination'
-                
-            ));
-           
-                
-               }
+->add('langue', EntityType::class, [
+    'class' => Langues::class,
+    'query_builder' => function (LanguesRepository $er) {
+        return $er->createQueryBuilder('l')
+            ->orderBy('l.combination', 'ASC');
+    },
+    'choice_label' => 'combination',
+]);
+             }
     
 
     public function configureOptions(OptionsResolver $resolver)
