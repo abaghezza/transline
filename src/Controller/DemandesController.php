@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 /**
  *
  * @Route("/demandes")
@@ -86,7 +87,7 @@ class DemandesController extends AbstractController
       
         return $this->render('demandes/show.html.twig', [
             'demandes' => $demandes,
-            'files' => $filesRepository->findAllFilesByDemande($demandes->getId()),
+            'file' => $filesRepository->findAllFilesByDemande($demandes->getId()),
         ]);
     }
 
@@ -111,11 +112,12 @@ class DemandesController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-	/*
-     * @Route("/{id}", name="delete_demandes", methods={"DELETE"})
-     */
+	
+	/**
+	*@Route("/{id}/delete", name="demandes_delete", methods={"DELETE"})
+	*/
 	 
-    public function delete(Request $request, Demandes $demande): Response
+    public function delete(Request $request, Demandes $demandes): Response
     {
         if (
             $this->isCsrfTokenValid(

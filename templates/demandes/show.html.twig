@@ -1,96 +1,47 @@
 {% extends 'base.html.twig' %}
-{% block title %}
 
-	
-	Informations sur la commande
-	{{ demandes.label }}
-{% endblock %}
+{% block title %}demande{% endblock %}
 
 {% block body %}
-	
-	<table class="table">
-		<th>
+<h1>Demande  {{demandes.id}}</h1>
 
-			<a href="{{ path('demandes_index') }}">Liste des commandes/</a>
-			{{ demandes.label  }}
-		</th>
-		<td>
-			Id:
-			{{demandes.id}}
-		</td>
-	</table>
-	
-	<h1>
-		{{ demandes.label  }}
-	</h1>
-
-	<table class="table">
-		<tbody>
+    <table class="table"></table>
+        <tbody>
+                          
+             <th>Libellé de la commande</th>
+                <td>{{ demandes.label}}</td>
+            </tr>
 			<tr>
-				<th>
-					Files
-				</th>
-				<td>
-					
-					<a href="{{ path('files_index',{d:demandes.id}) }}">Voir le fichier</a>
-					
-				</td>
-			</tr>
-			<tr>
-				<th>
-					commentaire
-				</th>
-				<td>
-					{{ demandes.comment }}
-				</td>
-			</tr>
-			
-					
-			<tr>
-				<th>
-					Combinaison linguistique
-				</th>
-				<td>
-					{{ demandes.langue }}
-				</td>
-			</tr>
-			<tr>
-				
-			
-
-
 			<th>
-				Date de commande
-			</th>
-			<td>
-				{{ demandes.createdAt ? demandes.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-		</tbody>
-	</tr>
-	{% if is_granted('ROLE_ADMIN') %}
-		
-		<tr>
-			<th>
-				commande passee par
-			</th>
-			{% if demandes.customer %}
-				<td>
-					{{ demandes.customer.firstname }}
+					Fichier
+				</th>
+								<td>
+					
+					<a href="{{ path('files',{d:demandes.id}) }}">Voir le fichier</a>
+					
 				</td>
-			{% else %}
-				<td>
-					Client inexistant
-				</td>
-			{% endif %}
-		</tr>
-	{% endif %}
-</tbody>
-</table>
-{% if demandes.customer==app.user or is_granted('ROLE_ADMIN')%}
-<button class="btn-link"><a href="{{ path( 'edit_demande', { id: demandes.id } ) }}">Modifier la demande</a></button>
- or 
-<button class"btn-link"><a href="{{ path('new_files', {d:demandes.id}) }}"> Ajouter un fichier</a></button>
-
-
-{{ include('demandes/_delete_form.html.twig') }}
-{% endif %}
+				</tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ demandes.createdAt ? demandes.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            
+            <tr>
+                <th>Status</th>
+                <td>{{ demandes.status}}</td>
+            </tr>
+			
+			<th>Combinaison linguistique</th>
+                <td>{{ demandes.langue}}</td>
+            </tr>
+			
+			<th>Commentaire</th>
+                <td>{{ demandes.comment}}</td>
+            </tr>
+			
+        </tbody>
+    </table>
+    
+    
+    	{{ include('demandes/_delete_form.html.twig') }}
 {% endblock %}

@@ -39,21 +39,21 @@
 			<tr>
 				<th>Quickview</th>
 				{#Example:#}
-				{#<td><img src="{{ vich_uploader_asset(documents, 'file') }}" width="50px"></td>#}
+				{#<td><img src="{{ vich_uploader_asset(demandes, 'file') }}" width="50px"></td>#}
 			</tr>
 
 
 		</tbody>
 	</table>
 
-	{% if file.documents  %}
+	{% if file.demandes  %}
 		{#!error handling#}
-		<a href="{{ path('files_index',{d:file.demandes.id}) }}">Retour a la liste des fichiers</a>
+		<a href="{{ path('files',{d:file.demandes.id}) }}">Retour a la liste des fichiers</a>
 	{% else %}
-		<a href="{{ path('files_index',{d:0}) }}">Retour a la liste des fichiers</a>
+		<a href="{{ path('files',{d:0}) }}">Retour a la liste des fichiers</a>
 	{% endif %}
 	{# NOTE:I don't need it in this step, but in the next step ...#}
-	{#<a href="{{ path('files_edit', {'id': file.id}, {'doc':file.documents.id}) }}">edit</a>#}
+	{#<a href="{{ path('files_edit', {'id': file.id}, {'d':file.demandes.id}) }}">edit</a>#}
 
 	{{ include('files/_delete_form.html.twig') }}
 {% endblock %}

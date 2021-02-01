@@ -28,8 +28,11 @@ class Langues
      * @ORM\Column(type="string", length=255)
      */
     private $combination;
-
-    
+/**
+ * @ORM\OneToMany(targetEntity=Demandes::class, mappedBy="demandes")   
+ */
+ 
+ private $demandes;
 
     
 
@@ -52,6 +55,22 @@ class Langues
         return $this;
     }
 
-    
+public function getDemandes(): ?Demandes
+    {
+        return $this->demandes;
+    }
+
+    public function setDemandes(?Demandes $demandes): self
+    {
+        $this->demandes = $demandes;
+
+        return $this;
+    }
+
+public function __toString(): string
+    {
+        return $this->getCombination();
+    }    
+
 
 }

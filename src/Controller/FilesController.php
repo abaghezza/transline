@@ -57,14 +57,14 @@ class FilesController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             //$file = $form->get('name')->getData();
             //dd($form);
-            $d=$file->getDemandes()->getId();
+            //$d=$file->getDemandes()->getId();
             
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($file);
             $entityManager->flush();
           
             
-              return $this->redirectToRoute('show_demande',['id'=>$d]);
+              return $this->redirectToRoute('demandes_index');
            
            
         }
@@ -144,7 +144,7 @@ class FilesController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('files_index');
+        return $this->redirectToRoute('files');
     }
 	
 	/**

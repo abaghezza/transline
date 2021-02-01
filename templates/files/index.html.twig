@@ -20,6 +20,7 @@
 				<tr>
 					{#<th>Id</th>#}
 					<th>Name</th>
+					<th>Commande</th>
 					<th>Path</th>
 					<th>Extension</th>
 					<th>Size</th>
@@ -32,9 +33,12 @@
 					<tr>
 						{#<td>{{ file.id }}</td>#}
 						<td>
-							<a href="{{ path('files_show', {'id': file.id}) }}">{{ file.name }}</a>
+							<a href="{{ path('show_files', {'id': file.id}) }}">{{ file.name }}</a>
 						</td>
-						<td>{{ file.path }}</td>
+						<td>
+						<a href="{{ path('show_demandes', {'id': file.demandes.id}) }}">{{ file.demandes }}</a>
+						</td>
+												<td>{{ file.path }}</td>
 						{% if file.extension== "application/pdf" %}
 						<td>pdf</td>
 						{% elseif file.extension == "application/msword" or file.extension == "application/vnd.openxmlformats-officedocument.wordprocessingml.document" %}
@@ -48,7 +52,7 @@
 
 						<td>
 							{#<a href="{{ path('files_show', {'id': file.id}) }}">show</a>#}
-							<a href="{{ path('files_delete', {'id': file.id}) }}">delete</a>
+							<a href="{{ path('delete_file', {'id': file.id}) }}">delete</a>
 						</td>
 					</tr>
 				{% else %}

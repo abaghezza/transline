@@ -11,6 +11,8 @@ use Vich\UploaderBundle\Form\Type\VichFileType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\PropertyAccess\PropertyPath;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class FilesType extends AbstractType
 {
@@ -52,8 +54,8 @@ class FilesType extends AbstractType
                     'class' => Demandes::class,
                     'query_builder' => function (DemandesRepository $er) {
                         return $er
-                            ->createQueryBuilder('t')
-                            ->andWhere('t.id= :val')
+                            ->createQueryBuilder('d')
+                            ->andWhere('d.id= :val')
                             ->setParameter('val', $_GET['d']);
                     },
                     'choice_label' => 'label',
@@ -77,8 +79,8 @@ class FilesType extends AbstractType
                     'class' => Demandes::class,
                     'query_builder' => function (DemandesRepository $er) {
                         return $er
-                            ->createQueryBuilder('t')
-                            ->orderBy('t.label', 'ASC');
+                            ->createQueryBuilder('d')
+                            ->orderBy('d.label', 'ASC');
                     },
                     'choice_label' => 'label',
                     'choice_value' => 'id',

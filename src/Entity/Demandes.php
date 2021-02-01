@@ -26,7 +26,8 @@ class Demandes
     private $user;
 	
     /**
-     * @ORM\OneToMany(targetEntity=Files::class, mappedBy="demande")
+     * @ORM\OneToMany(targetEntity=Files::class, mappedBy="demandes")
+	 * @ORM\JoinColumn(nullable=false)
      */
     private $file;
 
@@ -173,7 +174,7 @@ public function getLabel(): ?string
         return $this;
     }
 
-    public function getStatus($status): ?string
+    public function getStatus(): ?string
     {
         return $this->status;
     }
@@ -197,4 +198,8 @@ public function getLabel(): ?string
         return $this;
     }
 
+public function __toString(): string
+    {
+        return $this->getLabel();
+    }
 }
