@@ -42,7 +42,9 @@
 					{% if demandes.user %}
 					<a href="{{ path('show_demandes', {'id': demandes.id}) }}">Afficher</a>
 						<a href="{{ path('demandes_edit', {'id': demandes.id}) }}">Modifier</a>
+						<a href="{{ path('approve_demande', {'id': demandes.id}) }}">Envoyer tarification</a>
 					</td>
+													
 					{% endif %}
 				</tr>
 				{% else %}

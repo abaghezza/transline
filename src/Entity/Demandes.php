@@ -66,6 +66,16 @@ class Demandes
      */
     private $langue;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updatedAt;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $montant;
+
     
 
     public function __construct()
@@ -149,9 +159,9 @@ public function getLabel(): ?string
     }
 		
 	public function getMail(): ?string
-                            {
-                                return $this->mail;
-                            }
+                                              {
+                                                  return $this->mail;
+                                              }
 
     public function setMail(?string $mail): self
     {
@@ -202,4 +212,28 @@ public function __toString(): string
     {
         return $this->getLabel();
     }
+
+public function getUpdatedAt(): ?\DateTimeInterface
+{
+    return $this->updatedAt;
+}
+
+public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
+{
+    $this->updatedAt = $updatedAt;
+
+    return $this;
+}
+
+public function getMontant(): ?float
+{
+    return $this->montant;
+}
+
+public function setMontant(?float $montant): self
+{
+    $this->montant = $montant;
+
+    return $this;
+}
 }

@@ -10,6 +10,7 @@ use App\Repository\FilesRepository;
 use App\Repository\UsersRepository;
 use App\Repository\LanguesRepository;
 use App\Form\DemandesType;
+use App\Form\ApprovalType;
 use App\Repository\DemandesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -133,4 +134,31 @@ class DemandesController extends AbstractController
         return $this->redirectToRoute('demandes_index');
     }
    
+   //Fonction pour etablir un devis
+   
+   /**
+     * @Route("/{id}/approve_demande", name="approve_demande", methods={"GET","POST"})
+     */
+	 
+   public function approval(Request $request, Demandes $demandes, UsersRepository $users): Response
+    {
+        $form = $this->createForm(ApprovalType::class, $demandes);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+			$demandes->setUpdatedAt(new \DateTime('now'));
+			$demandes->setStatus('validee');
+            $this->getDoctrine()
+                ->getManager()
+                ->flush();
+
+            return $this->redirectToRoute('demandes_index');
+        }
+
+        return $this->render('demandes/edit.html.twig', [
+            'demandes' => $demandes,
+            'form' => $form->createView(),
+        ]);
+    }
 }

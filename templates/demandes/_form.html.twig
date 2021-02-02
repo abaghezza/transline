@@ -1,5 +1,18 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Sauvegarder et ajouter un fichier') }}</button>
-    
-{{ form_end(form) }}
+{% if app.request.attributes.get("_route") == "show_demandes" or app.request.attributes.get("_route") == "approve_demande"%}
+{{ form_start(form) }}	
+	{{ form_widget(form) }}
+	<button class="btn">{{ button_label|default('Soumettre le devis') }}</button>
+	{{ form_end(form) }}
+	
+	{% elseif app.request.attributes.get("_route") == "edit_demandes"%}
+	{{ form_start(form) }}	
+	{{ form_widget(form) }}
+	<button class="btn">{{ button_label|default('Mettre a jour') }}</button>
+	{{ form_end(form) }}
+	
+	{% else %}
+	{{ form_start(form) }}	
+	{{ form_widget(form) }}
+	<button class="btn">{{ button_label|default('Valider et ajouter un fichier') }}</button>
+	{{ form_end(form) }}
+	{%endif%}

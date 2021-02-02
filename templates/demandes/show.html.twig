@@ -39,9 +39,21 @@
                 <td>{{ demandes.comment}}</td>
             </tr>
 			
+			<th>Montant du devis</th>
+                <td>{{ demandes.montant}} €</td>
+            </tr>
+			
+			<th>Date de validation</th>
+                <td>{{ demandes.updatedAt ? demandes.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+			
         </tbody>
     </table>
     
+	<a href="{{ path('approve_demande', {'id': demandes.id}) }}">Envoyer tarification</a>
     
-    	{{ include('demandes/_delete_form.html.twig') }}
+    	{{ include('demandes/_delete_form.html.twig')}}
+		
+		    	
+		
 {% endblock %}
