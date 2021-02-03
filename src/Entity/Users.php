@@ -82,9 +82,15 @@ class Users implements UserInterface
      */
     private $demande;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Langues::class)
+     */
+    private $languages;
+
     public function __construct()
     {
         $this->demande = new ArrayCollection();
+        $this->languages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -294,6 +300,30 @@ class Users implements UserInterface
                 $demande->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Langues[]
+     */
+    public function getLanguages(): Collection
+    {
+        return $this->languages;
+    }
+
+    public function addLanguage(Langues $language): self
+    {
+        if (!$this->languages->contains($language)) {
+            $this->languages[] = $language;
+        }
+
+        return $this;
+    }
+
+    public function removeLanguage(Langues $language): self
+    {
+        $this->languages->removeElement($language);
 
         return $this;
     }

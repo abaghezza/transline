@@ -48,8 +48,8 @@ class UsersType extends AbstractType
             ])
             ->add('firstName', TextType::class)
             ->add('lastName', TextType::class)
-            ->add('address', TextType::class)
-            ->add('postalCode', NumberType::class)
+            ->add('adress', TextType::class)
+            ->add('postcode', NumberType::class)
             ->add('city', TextType::class)           
             ->add('createdAt', DateTimeType::class, [
                 'disabled' => true,

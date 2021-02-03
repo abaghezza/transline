@@ -76,6 +76,11 @@ class Demandes
      */
     private $montant;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $response;
+
     
 
     public function __construct()
@@ -159,9 +164,9 @@ public function getLabel(): ?string
     }
 		
 	public function getMail(): ?string
-                                              {
-                                                  return $this->mail;
-                                              }
+                                                       {
+                                                           return $this->mail;
+                                                       }
 
     public function setMail(?string $mail): self
     {
@@ -233,6 +238,18 @@ public function getMontant(): ?float
 public function setMontant(?float $montant): self
 {
     $this->montant = $montant;
+
+    return $this;
+}
+
+public function getResponse(): ?bool
+{
+    return $this->response;
+}
+
+public function setResponse(?bool $response): self
+{
+    $this->response = $response;
 
     return $this;
 }

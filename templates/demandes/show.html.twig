@@ -52,6 +52,8 @@
     
 	<a href="{{ path('approve_demande', {'id': demandes.id}) }}">Envoyer tarification</a>
     
+	<a href="{{ path('accept_estimate', {'id': demandes.id}) }}">Le montant me convient ? Je confirme ma demande de traduction.</a>
+	
     	{{ include('demandes/_delete_form.html.twig')}}
 		
 		    	

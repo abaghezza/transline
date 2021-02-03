@@ -11,6 +11,7 @@ use App\Repository\UsersRepository;
 use App\Repository\LanguesRepository;
 use App\Form\DemandesType;
 use App\Form\ApprovalType;
+use App\Form\AcceptEstimateType;
 use App\Repository\DemandesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -149,6 +150,40 @@ class DemandesController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 			$demandes->setUpdatedAt(new \DateTime('now'));
 			$demandes->setStatus('validee');
+            $this->getDoctrine()
+                ->getManager()
+                ->flush();
+
+            return $this->redirectToRoute('demandes_index');
+        }
+
+        return $this->render('demandes/edit.html.twig', [
+            'demandes' => $demandes,
+            'form' => $form->createView(),
+        ]);
+    }
+	
+	/**
+     * @Route("/{id}/accept_estimate", name="accept_estimate", methods={"GET","POST"})
+     */
+	 
+   public function acceptEstimate(Request $request, Demandes $demandes, UsersRepository $users): Response
+    {
+        $form = $this->createForm(AcceptEstimateType::class, $demandes);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+			//$demandes->setUpdatedAt(new \DateTime('now'));
+			if($demandes->getResponse()==1) {
+				
+			$demandes->setStatus('acceptée');
+			}
+			
+			else {
+				$demandes->setStatus('Terminée');
+			}
+			
             $this->getDoctrine()
                 ->getManager()
                 ->flush();
